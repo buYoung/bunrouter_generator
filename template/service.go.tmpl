@@ -1,0 +1,33 @@
+package {{.PackageName}}
+
+type {{.Name}}Interface interface {
+    Create({{.LowerName}} {{.Name}})
+    Read({{.Name}}ID int64) {{.Name}}
+    Reads() []{{.Name}}
+    Update({{.LowerName}} {{.Name}})
+    Delete({{.LowerName}}ID int64)
+}
+
+type {{.Name}}ServiceImpl struct {
+    // {{.LowerName}} db connection
+}
+
+func (u *{{.Name}}ServiceImpl) Create({{.LowerName}} {{.Name}}) error {
+    return nil
+}
+
+func (u *{{.Name}}ServiceImpl) Read({{.Name}}ID int64) ({{.Name}}, error) {
+    return {{.Name}}{}, nil
+}
+
+func (u *{{.Name}}ServiceImpl) Reads() ([]{{.Name}}, error) {
+    return []{{.Name}}{}, nil
+}
+
+func (u *{{.Name}}ServiceImpl) Update({{.LowerName}} {{.Name}}) error {
+    return nil
+}
+
+func (u *{{.Name}}ServiceImpl) Delete({{.LowerName}}ID int64) error {
+    return nil
+}

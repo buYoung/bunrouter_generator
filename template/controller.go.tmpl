@@ -1,0 +1,53 @@
+package {{.PackageName}}
+
+import (
+    `net/http`
+
+    `github.com/uptrace/bunrouter`
+)
+
+type {{.Name}}Handler struct {
+    {{.Name}}Interface
+}
+
+func (u *{{.Name}}Handler) Router(bun *bunrouter.Group) {
+    bun.WithGroup("/{{.LowerName}}", func(g *bunrouter.Group) {
+        g.GET("/:id", u.read)
+        g.GET("/", u.reads)
+        g.POST("/", u.create)
+        g.PUT("/:id", u.update)
+        g.DELETE("/:id", u.delete)
+    })
+}
+
+func (u *{{.Name}}Handler) create(w http.ResponseWriter, req bunrouter.Request) error {
+    return bunrouter.JSON(w, bunrouter.H{
+        "result": "created {{.LowerName}}",
+        "params": req.Params().Map(),
+    })
+}
+
+func (u *{{.Name}}Handler) read(w http.ResponseWriter, req bunrouter.Request) error {
+    return bunrouter.JSON(w, bunrouter.H{
+        "result": "read {{.LowerName}}",
+        "params": req.Params().Map(),
+    })
+}
+func (u *{{.Name}}Handler) reads(w http.ResponseWriter, req bunrouter.Request) error {
+    return bunrouter.JSON(w, bunrouter.H{
+        "result": "read {{.LowerName}}s",
+    })
+}
+
+func (u *{{.Name}}Handler) update(w http.ResponseWriter, req bunrouter.Request) error {
+    return bunrouter.JSON(w, bunrouter.H{
+        "result": "updated {{.LowerName}}",
+        "params": req.Params().Map(),
+    })
+}
+func (u *{{.Name}}Handler) delete(w http.ResponseWriter, req bunrouter.Request) error {
+    return bunrouter.JSON(w, bunrouter.H{
+        "result": "deleted {{.LowerName}}",
+        "params": req.Params().Map(),
+    })
+}
